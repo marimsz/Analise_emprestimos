@@ -1,6 +1,6 @@
 const analiseService = require('../services/analiseService');
 
-async function analisar(req, res) {
+async function analise(req, res) {
     try {
         const cliente = req.body;
 
@@ -22,5 +22,5 @@ async function analisar(req, res) {
 }
 
 module.exports = {
-    analisar
+    analise
 }

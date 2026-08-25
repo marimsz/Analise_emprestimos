@@ -117,6 +117,7 @@ Exemplo de requisição:
 Exemplo de URL:
 
 POST http://localhost:3000/customers
+
 4.2 Listar todos os clientes
 
 GET /customers
@@ -126,6 +127,7 @@ Retorna todos os clientes cadastrados.
 Exemplo:
 
 GET http://localhost:3000/customers
+
 4.3 Buscar cliente pelo CPF
 
 GET /customers/:cpf
@@ -135,6 +137,7 @@ Busca um cliente utilizando o CPF.
 Exemplo:
 
 GET http://localhost:3000/customers/12345678900
+
 4.4 Atualizar cliente
 
 PUT /customers/:cpf
