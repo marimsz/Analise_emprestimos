@@ -12,7 +12,7 @@ async function cadastrar(req, res) {
 
     } catch (erro) {
 
-        console.log('ERRO:', erro);
+        console.log(erro);
 
         res.status(400).json({
             erro: erro.message
