@@ -29,31 +29,19 @@ function cadastrarCliente(cliente) {
         });
     });
 }
+    async function listarClientes() {
 
-    function listarClientes() {
-        
-        return new Promise((resolve, reject) => {
-
-        const sql = `
+        const [resultado] = await connection.query(`
             SELECT
-                cpf,
-                idade,
-                nome,
-                renda_mensal,
-                estado_onde_reside
+              cpf,
+              idade,
+              nome,
+              renda_mensal,
+              estado_onde_reside
             FROM cliente
-        `;
+           `);
 
-        connection.query(sql, (erro, resultado) => {
-
-            if (erro) {
-                reject(erro);
-                return;
-            }
-
-            resolve(resultado);
-        });
-    });
+         return resultado;
 }
 
     function buscarPorCpf(cpf) {
