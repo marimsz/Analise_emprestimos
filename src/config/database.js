@@ -1,21 +1,21 @@
- const mysql = require('mysql2');
+const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
- const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "analise_emprestimosdb"
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: "mysql",
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+      },
+    },
+  }
+);
 
- });
-
- connection.connect((err) => {
-    if (err) {
-        console.log('Erro o conectar ao banco!');
-        console.log(err.message);
-        return;
-    }
-
-    console.log('Banco de dados conectado!');
- });
-
- module.exports = connection;
+module.exports = sequelize;
