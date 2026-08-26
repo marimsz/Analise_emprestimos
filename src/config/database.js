@@ -1,4 +1,4 @@
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 
 require("dotenv").config();
 
@@ -13,15 +13,18 @@ const connection = mysql.createPool({
     }
 });
 
-connection.getConnection((erro, conexao) => {
-    if (erro) {
+async function testarConexao() {
+    try {
+        const conexao = await connection.getConnection();
+
+        console.log("Banco de dados conectado com sucesso!");
+
+        conexao.release();
+    } catch (erro) {
         console.error("Erro ao conectar com o banco:", erro);
-        return;
     }
+}
 
-    console.log("Banco de dados conectado com sucesso!");
-
-    conexao.release();
-});
+testarConexao();
 
 module.exports = connection;
