@@ -33,7 +33,7 @@ async function cadastrar(req, res) {
         console.log('ERRO:', erro);
 
         res.status(500).json({
-            erro: 'Erro ao listar clientes',
+            erro:'Erro ao listar clientes',
             mensagem: erro.message
         });
     }
