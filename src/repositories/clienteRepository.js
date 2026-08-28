@@ -1,42 +1,38 @@
 const connection = require('../config/database');
 
 
-function cadastrarCliente(cliente) {
+async function cadastrarCliente(cliente) {
 
-    return new Promise((resolve, reject) => {
+    const sql = `
+        INSERT INTO cliente
+        (cpf, idade, nome, renda_mensal, estado_onde_reside)
+        VALUES (?, ?, ?, ?, ?)
+    `;
 
-        const sql = `
-            INSERT INTO cliente
-            (cpf, idade, nome, renda_mensal, estado_onde_reside)
-            VALUES (?, ?, ?, ?, ?)
-        `;
+    const valores = [
+        cliente.cpf,
+        cliente.idade,
+        cliente.nome,
+        cliente.renda_mensal,
+        cliente.estado_onde_reside
+    ];
 
-        const valores = [
-            cliente.cpf,
-            cliente.idade,
-            cliente.nome,
-            cliente.renda_mensal,
-            cliente.estado_onde_reside
-        ];
+    try {
 
-        connection.query(sql, valores, (erro, resultado) => {
+        const [resultado] = await connection.query(sql, valores);
 
-            if (erro) {
+        return resultado;
 
-                if (erro.code === 'ER_DUP_ENTRY') {
-                    const erroDuplicado = new Error('CPF já cadastrado');
-                    erroDuplicado.status = 409;
-                    reject(erroDuplicado);
-                    return;
-                }
+    } catch (erro) {
 
-                reject(erro);
-                return;
-            }
+        if (erro.code === 'ER_DUP_ENTRY') {
+            const erroDuplicado = new Error('CPF já cadastrado');
+            erroDuplicado.status = 409;
+            throw erroDuplicado;
+        }
 
-            resolve(resultado);
-        });
-    });
+        throw erro;
+    }
 }
 
 
