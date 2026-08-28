@@ -9,9 +9,13 @@ const app = express();
 
 app.use(cors(
    {
-     origin: '*',
-   }
-));
+     origin: [
+      'http://localhost:3000',
+      'https://emprestimos-front.vercel.app/',
+     ],
+     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+     allowedHeaders: ['Content-type']
+ }));
 
 app.use(express.json());
 
@@ -23,4 +27,5 @@ const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
+
 });
