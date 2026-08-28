@@ -1,10 +1,11 @@
 const connection = require('../config/database');
 
+
 function cadastrarCliente(cliente) {
-    
+
     return new Promise((resolve, reject) => {
 
-           const sql = `
+        const sql = `
             INSERT INTO cliente
             (cpf, idade, nome, renda_mensal, estado_onde_reside)
             VALUES (?, ?, ?, ?, ?)
@@ -21,6 +22,14 @@ function cadastrarCliente(cliente) {
         connection.query(sql, valores, (erro, resultado) => {
 
             if (erro) {
+
+                if (erro.code === 'ER_DUP_ENTRY') {
+                    const erroDuplicado = new Error('CPF já cadastrado');
+                    erroDuplicado.status = 409;
+                    reject(erroDuplicado);
+                    return;
+                }
+
                 reject(erro);
                 return;
             }
@@ -29,6 +38,8 @@ function cadastrarCliente(cliente) {
         });
     });
 }
+
+
     async function listarClientes() {
 
         const [resultado] = await connection.query(`

@@ -1,5 +1,6 @@
 const clienteService = require('../services/clienteService');
 
+
 async function cadastrar(req, res) {
 
     try {
@@ -12,13 +13,21 @@ async function cadastrar(req, res) {
 
     } catch (erro) {
 
-        console.log(erro);
+        console.log('ERRO AO CADASTRAR:', erro);
 
-        res.status(400).json({
+        if (erro.status === 409) {
+            return res.status(409).json({
+                erro: erro.message
+            });
+        }
+
+        return res.status(400).json({
             erro: erro.message
         });
     }
 }
+
+
 
      async function listar(req, res) {
 
