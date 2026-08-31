@@ -105,25 +105,17 @@ async function buscarPorId(id) {
     });
 }
 
-    function deletarCliente(id_cliente) {
-        return new Promise((resolve, reject) => {
+    async function deletarCliente(id_cliente) {
 
-            const sql = `
-            DELETE FROM cliente
-            WHERE id_cliente = ?
-            `;
+    const sql = `
+        DELETE FROM cliente
+        WHERE id_cliente = ?
+    `;
 
-               connection.query(sql, [id_cliente], (erro, resultado) => {
+    const [resultado] = await connection.query(sql, [id_cliente]);
 
-            if (erro) {
-                reject(erro);
-                return;
-            }
-
-            resolve(resultado);
-        });
-      });
-    }
+    return resultado;
+}
     
 
 module.exports = {

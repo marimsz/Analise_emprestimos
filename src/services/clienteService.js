@@ -113,9 +113,9 @@ async function atualizarCliente(cpf, cliente) {
         throw new Error('ID do cliente é obrigatório');
     }
 
-    const cliente = await clienteRepository.deletarCliente(id_cliente);
+    const resultado = await clienteRepository.deletarCliente(id_cliente);
 
-    if (!resultado.affectedRows === 0) {
+    if (resultado.affectedRows === 0) {
         throw new Error('Cliente não encontrado');
     }
 
