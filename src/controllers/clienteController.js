@@ -48,13 +48,13 @@ async function cadastrar(req, res) {
     }
 }
 
-    async function buscarPorCpf(req, res) {
+    async function buscarPorId(req, res) {
 
     try {
 
-        const cpf = req.params.cpf;
+        const id = req.params.id_cliente;
 
-        const cliente = await clienteService.buscarPorCpf(cpf);
+        const cliente = await clienteService.buscarPorId(id);
 
         res.status(200).json(cliente);
 
@@ -115,7 +115,7 @@ async function cadastrar(req, res) {
 module.exports = {
     cadastrar,
     listar,
-    buscarPorCpf,
+    buscarPorId,
     atualizar,
     deletar
 };

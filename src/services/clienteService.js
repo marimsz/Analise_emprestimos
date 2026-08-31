@@ -47,13 +47,13 @@ async function listarClientes() {
 }
 
 
-async function buscarPorCpf(cpf) {
+async function buscarPorId(id) {
 
-    if (!cpf) {
-        throw new Error('CPF é obrigatório');
+    if (!id) {
+        throw new Error('Não existe cliente');
     }
 
-    const cliente = await clienteRepository.buscarPorCpf(cpf);
+    const cliente = await clienteRepository.buscarPorId(id);
 
     if (!cliente) {
         throw new Error('Cliente não encontrado');
@@ -129,7 +129,7 @@ async function atualizarCliente(cpf, cliente) {
 module.exports = {
     cadastrarCliente,
     listarClientes,
-    buscarPorCpf,
+    buscarPorId,
     atualizarCliente,
     deletarCliente
 };

@@ -40,6 +40,7 @@ async function cadastrarCliente(cliente) {
 
         const [resultado] = await connection.query(`
             SELECT
+              id_cliente,
               cpf,
               idade,
               nome,
@@ -51,31 +52,24 @@ async function cadastrarCliente(cliente) {
          return resultado;
 }
 
-    function buscarPorCpf(cpf) {
+    
+async function buscarPorId(id) {
 
-    return new Promise((resolve, reject) => {
+    const sql = `
+        SELECT 
+            id_cliente,
+            cpf,
+            idade,
+            nome,
+            renda_mensal,
+            estado_onde_reside
+        FROM cliente
+        WHERE id_cliente = ?
+    `;
 
-        const sql = `
-            SELECT
-                cpf,
-                idade,
-                nome,
-                renda_mensal,
-                estado_onde_reside
-            FROM cliente
-            WHERE cpf = ?
-        `;
+    const [resultado] = await connection.query(sql, [id]);
 
-        connection.query(sql, [cpf], (erro, resultado) => {
-
-            if (erro) {
-                reject(erro);
-                return;
-            }
-
-            resolve(resultado[0]);
-        });
-    });
+    return resultado[0];
 }
 
     function atualizarCliente(cpf, cliente) {
@@ -135,7 +129,7 @@ async function cadastrarCliente(cliente) {
 module.exports = {
     cadastrarCliente,
     listarClientes,
-    buscarPorCpf,
+    buscarPorId,
     atualizarCliente,
     deletarCliente
 };

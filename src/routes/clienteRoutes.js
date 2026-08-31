@@ -8,7 +8,7 @@ router.post('/customers', clienteController.cadastrar);
 
 router.get('/customers', clienteController.listar);
 
-router.get('/customers/:cpf', clienteController.buscarPorCpf);
+router.get('/customers/:id_cliente', clienteController.buscarPorId);
 
 router.put('/customers/:cpf', clienteController.atualizar);
 
