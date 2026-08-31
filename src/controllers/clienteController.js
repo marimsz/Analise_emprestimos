@@ -68,15 +68,15 @@ async function cadastrar(req, res) {
     }
 }
 
-    async function atualizar(req, res) {
+  async function atualizar(req, res) {
 
     try {
 
-        const cpf = req.params.cpf;
+        const id_cliente = req.params.id_cliente;
         const cliente = req.body;
 
         const resultado = await clienteService.atualizarCliente(
-            cpf,
+            id_cliente,
             cliente
         );
 
@@ -84,7 +84,7 @@ async function cadastrar(req, res) {
 
     } catch (erro) {
 
-        console.log('ERRO:', erro);
+        console.log('ERRO AO ATUALIZAR:', erro);
 
         res.status(400).json({
             erro: erro.message

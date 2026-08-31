@@ -61,12 +61,10 @@ async function buscarPorId(id) {
 
     return cliente;
 }
+async function atualizarCliente(id_cliente, cliente) {
 
-
-async function atualizarCliente(cpf, cliente) {
-
-    if (!cpf) {
-        throw new Error('CPF é obrigatório');
+    if (!id_cliente) {
+        throw new Error('ID do cliente é obrigatório');
     }
 
     if (!cliente.nome) {
@@ -93,17 +91,21 @@ async function atualizarCliente(cpf, cliente) {
         throw new Error('Renda mensal inválida');
     }
 
-    const clienteExistente = await clienteRepository.buscarPorCpf(cpf);
+    const clienteExistente =
+        await clienteRepository.buscarPorId(id_cliente);
 
     if (!clienteExistente) {
         throw new Error('Cliente não encontrado');
     }
 
-    await clienteRepository.atualizarCliente(cpf, cliente);
+    await clienteRepository.atualizarCliente(
+        id_cliente,
+        cliente
+    );
 
     return {
         mensagem: 'Cliente atualizado com sucesso',
-        cpf: cpf
+        id_cliente: id_cliente
     };
 }
 

@@ -72,37 +72,28 @@ async function buscarPorId(id) {
     return resultado[0];
 }
 
-    function atualizarCliente(cpf, cliente) {
+    async function atualizarCliente(cpf, cliente) {
 
-    return new Promise((resolve, reject) => {
+    const sql = `
+        UPDATE cliente
+        SET idade = ?,
+            nome = ?,
+            renda_mensal = ?,
+            estado_onde_reside = ?
+        WHERE cpf = ?
+    `;
 
-        const sql = `
-            UPDATE cliente
-            SET idade = ?,
-                nome = ?,
-                renda_mensal = ?,
-                estado_onde_reside = ?
-            WHERE cpf = ?
-        `;
+    const valores = [
+        cliente.idade,
+        cliente.nome,
+        cliente.renda_mensal,
+        cliente.estado_onde_reside,
+        cpf
+    ];
 
-        const valores = [
-            cliente.idade,
-            cliente.nome,
-            cliente.renda_mensal,
-            cliente.estado_onde_reside,
-            cpf
-        ];
+    const [resultado] = await connection.query(sql, valores);
 
-        connection.query(sql, valores, (erro, resultado) => {
-
-            if (erro) {
-                reject(erro);
-                return;
-            }
-
-            resolve(resultado);
-        });
-    });
+    return resultado;
 }
 
     async function deletarCliente(id_cliente) {

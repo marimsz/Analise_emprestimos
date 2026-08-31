@@ -10,7 +10,7 @@ router.get('/customers', clienteController.listar);
 
 router.get('/customers/:id_cliente', clienteController.buscarPorId);
 
-router.put('/customers/:cpf', clienteController.atualizar);
+router.put('/customers/:id_cliente', clienteController.atualizar);
 
 router.delete('/customers/:id_cliente', clienteController.deletar);
 
