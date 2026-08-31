@@ -11,7 +11,7 @@ app.use(cors(
    {
      origin: [
         'http://localhost:3000',
-        'https://emprestimos-front.vercel.app/'
+        'https://emprestimos-front.vercel.app'
      ],
      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
      allowedHeaders: ['Content-type']
