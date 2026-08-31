@@ -12,6 +12,6 @@ router.get('/customers/:cpf', clienteController.buscarPorCpf);
 
 router.put('/customers/:cpf', clienteController.atualizar);
 
-router.delete('/customers/:cpf', clienteController.deletar);
+router.delete('/customers/:id_cliente', clienteController.deletar);
 
 module.exports = router;

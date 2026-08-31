@@ -111,16 +111,15 @@ async function cadastrarCliente(cliente) {
     });
 }
 
-    function deletarCliente(cpf) {
-        
+    function deletarCliente(id_cliente) {
         return new Promise((resolve, reject) => {
 
             const sql = `
             DELETE FROM cliente
-            WHERE cpf = ?
+            WHERE id_cliente = ?
             `;
 
-               connection.query(sql, [cpf], (erro, resultado) => {
+               connection.query(sql, [id_cliente], (erro, resultado) => {
 
             if (erro) {
                 reject(erro);

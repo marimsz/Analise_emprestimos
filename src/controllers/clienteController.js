@@ -96,9 +96,9 @@ async function cadastrar(req, res) {
 
     try {
 
-        const cpf = req.params.cpf;
+        const id_cliente = req.params.id_cliente;
 
-        const resultado = await clienteService.deletarCliente(cpf);
+        const resultado = await clienteService.deletarCliente(id_cliente);
 
         res.status(200).json(resultado);
 

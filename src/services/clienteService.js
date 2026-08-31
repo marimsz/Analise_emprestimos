@@ -107,23 +107,21 @@ async function atualizarCliente(cpf, cliente) {
     };
 }
 
-    async function deletarCliente(cpf) {
+    async function deletarCliente(id_cliente) {
 
-    if (!cpf) {
-        throw new Error('CPF é obrigatório');
+    if (!id_cliente) {
+        throw new Error('ID do cliente é obrigatório');
     }
 
-    const cliente = await clienteRepository.buscarPorCpf(cpf);
+    const cliente = await clienteRepository.deletarCliente(id_cliente);
 
-    if (!cliente) {
+    if (!resultado.affectedRows === 0) {
         throw new Error('Cliente não encontrado');
     }
 
-    await clienteRepository.deletarCliente(cpf);
-
     return {
         mensagem: 'Cliente removido com sucesso',
-        cpf: cpf
+        id_cliente: id_cliente
     };
 }
 
