@@ -1,6 +1,7 @@
 const clienteRepository = require('../repositories/clienteRepository');
 
 function validarCliente(cliente) {
+    
        if (!cliente.cpf) {
         throw new Error('CPF é obrigatório');
     }
