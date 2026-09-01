@@ -1,8 +1,7 @@
 const clienteRepository = require('../repositories/clienteRepository');
 
-async function cadastrarCliente(cliente) {
-
-    if (!cliente.cpf) {
+function validarCliente() {
+       if (!cliente.cpf) {
         throw new Error('CPF é obrigatório');
     }
 
@@ -29,6 +28,12 @@ async function cadastrarCliente(cliente) {
     if (cliente.renda_mensal < 0) {
         throw new Error('Renda mensal inválida');
     }
+}
+
+
+//Cadastrar Cliente
+async function cadastrarCliente(cliente) {
+    validarCliente(cliente);
 
     await clienteRepository.cadastrarCliente(cliente);
 
@@ -38,7 +43,7 @@ async function cadastrarCliente(cliente) {
     };
 }
 
-
+//Listar Cliente
 async function listarClientes() {
 
     const clientes = await clienteRepository.listarClientes();
@@ -46,7 +51,7 @@ async function listarClientes() {
     return clientes;
 }
 
-
+//Buscar Por ID
 async function buscarPorId(id) {
 
     if (!id) {
@@ -61,35 +66,14 @@ async function buscarPorId(id) {
 
     return cliente;
 }
-async function atualizarCliente(id_cliente, cliente) {
 
-    if (!id_cliente) {
+//Atualizar Cliente
+async function atualizarCliente(id_cliente, cliente) {
+if (!id_cliente) {
         throw new Error('ID do cliente é obrigatório');
     }
 
-    if (!cliente.nome) {
-        throw new Error('Nome é obrigatório');
-    }
-
-    if (cliente.idade === undefined || cliente.idade === null) {
-        throw new Error('Idade é obrigatória');
-    }
-
-    if (cliente.renda_mensal === undefined || cliente.renda_mensal === null) {
-        throw new Error('Renda mensal é obrigatória');
-    }
-
-    if (!cliente.estado_onde_reside) {
-        throw new Error('Estado onde reside é obrigatório');
-    }
-
-    if (cliente.idade <= 0) {
-        throw new Error('Idade inválida');
-    }
-
-    if (cliente.renda_mensal < 0) {
-        throw new Error('Renda mensal inválida');
-    }
+    validarCliente(cliente);
 
     const clienteExistente =
         await clienteRepository.buscarPorId(id_cliente);
@@ -109,6 +93,8 @@ async function atualizarCliente(id_cliente, cliente) {
     };
 }
 
+
+//Deletar Cliente
     async function deletarCliente(id_cliente) {
 
     if (!id_cliente) {
