@@ -72,7 +72,7 @@ async function buscarPorId(id) {
     return resultado[0];
 }
 
-    async function atualizarCliente(cpf, cliente) {
+    async function atualizarCliente(id_cliente, cliente) {
 
     const sql = `
         UPDATE cliente
@@ -80,7 +80,7 @@ async function buscarPorId(id) {
             nome = ?,
             renda_mensal = ?,
             estado_onde_reside = ?
-        WHERE cpf = ?
+        WHERE id_cliente = ?
     `;
 
     const valores = [
@@ -88,7 +88,7 @@ async function buscarPorId(id) {
         cliente.nome,
         cliente.renda_mensal,
         cliente.estado_onde_reside,
-        cpf
+        id_cliente
     ];
 
     const [resultado] = await connection.query(sql, valores);
