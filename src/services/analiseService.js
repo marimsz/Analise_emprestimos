@@ -40,7 +40,7 @@ async function analisarCliente(cliente) {
         WHERE tipo IN (${placeholders})
     `;
 
-    const [resultado] = await connection.promise().query(
+    const [resultado] = await connection().query(
         sql,
         tiposDisponiveis
     );
