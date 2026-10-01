@@ -65,6 +65,7 @@ CREATE TABLE emprestimo (
     foreign key (id_modalidade) references modalidade_emprestimo(id_modalidade)
 );
 
+
 Insira as modalidades disponíveis:
 
 INSERT INTO modalidade_emprestimo
